@@ -1,9 +1,5 @@
 ﻿namespace sk_dev;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 internal class PromptSettings

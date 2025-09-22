@@ -1,14 +1,21 @@
 ﻿namespace sk_dev;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 internal class Program
 {
     static async Task Main(string[] args)
     {
-        var modelId = "gpt-4o";
+        IConfiguration config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .AddUserSecrets<Program>()
+            .Build();
+
+        var modelId = config["modelId"];
         var apiKey = Environment.GetEnvironmentVariable("OAI_SK_DEV_KEY") ?? throw new InvalidOperationException("Please set the OAI_SK_DEV_KEY environment variable.");
 
 
